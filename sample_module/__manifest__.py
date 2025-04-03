@@ -5,16 +5,18 @@
     'summary': 'madre mia',
     'description': """ This Module for training purposes.
     """,
-    'category':'',
-    'author': 'shivakumar khot',
+    'category':'Training',
+    'author': 'Nagabhushan',
     'website': 'www.zbeanztech.com',
     "license": "LGPL-3",
-    'depends': [],
+    'depends': ['base','sale','sale_management','account','contacts'],
     'data': [
-				'security/ir.model.access.csv',
-				'security/security.xml',
+				'security/security.xml', # Always keep security fiels @ top
+                'security/ir.model.access.csv', # Always keep security fiels @ top
 				'views/model_one_view.xml',
+                'views/food.xml',
 				'views/menu.xml',
+                'views/car_rental.xml'
 				
         ],
     'test': [],

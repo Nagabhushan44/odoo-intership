@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- First define the category if needed -->
-    <record id="module_category_sample" model="ir.module.category">
-        <field name="name">Sample Module</field>
-        <field name="description">Sample Module Category</field>
-        <field name="sequence">100</field>
+    <!-- Module Category -->
+    <record id="sample_module_category" model="ir.module.category">
+        <field name="name">My Training Module</field>
+        <field name="description">Category for Training purposes</field>
+        <field name="sequence">45</field>
     </record>
 
-    <!-- Main group definition -->
+    <!-- Admin Group -->
     <record id="group_sample_module" model="res.groups">
-        <field name="name">Sample Module Group</field>
-        <field name="category_id" ref="module_category_sample"/>
+        <field name="name">Admin Group</field>
+        <field name="category_id" ref="sample_module_category" />
     </record>
 
-    <!-- Sub group definition -->
+    <!-- Demo Group -->
     <record id="sub_group_sample_module" model="res.groups">
-        <field name="name">Sample Sub Group</field>
-        <field name="category_id" ref="module_category_sample"/>
-        <field name="implied_ids" eval="[(4, ref('group_sample_module'))]"/>
+        <field name="name">Demo Group</field>
+        <field name="category_id" ref="sample_module_category" />
+        <field name="implied_ids" eval="[(4, ref('sample_module.group_sample_module'))]" />
     </record>
 
-    <!-- Security rule - reference your module's group -->
-    <record id="record_rule_for_model_one" model="ir.rule">
-        <field name="name">Rule for Model One</field>
-        <field name="model_id" ref="model_model_one"/>
+    <!-- Rule for Admins: See all records -->
+    <record id="record_rule_admin_model_one" model="ir.rule">
+        <field name="name">Admin: Access All Records</field>
+        <field name="model_id" ref="sample_module.model_model_one"/>
         <field name="groups" eval="[(4, ref('sample_module.group_sample_module'))]"/>
-        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="domain_force">[(1, '=', 1)]</field>  <!-- Grants access to all records -->
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+
+    <!-- Rule for Demo Users: See only own records -->
+    <record id="record_rule_demo_model_one" model="ir.rule">
+        <field name="name">Demo: Access Own Records Only</field>
+        <field name="model_id" ref="sample_module.model_model_one"/>
+        <field name="groups" eval="[(4, ref('sample_module.sub_group_sample_module'))]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>  <!-- Restricts to own records -->
         <field name="perm_create" eval="1"/>
         <field name="perm_write" eval="1"/>
         <field name="perm_unlink" eval="1"/>
