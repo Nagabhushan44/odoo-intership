@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
+<<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Main Menu-->
+    <!-- Connect to Odoo's main menu -->
     <menuitem id="menu_for_sampleeee_module"
         name="Sample Menu"
+        parent="base.menu_root"   <!-- Connect to Odoo's root menu -->
         sequence="2"/>
         
-    <!--Sub Menu-->
+    <!-- Sub Menu -->
     <menuitem id="menu_for_model_one"
         name="Models"
         action="action_for_model_one"
-        parent='menu_for_sampleeee_module'
+        parent="menu_for_sampleeee_module"  <!-- Reference without module prefix -->
         sequence="1" />
-        
-</odoo>
 
+    <menuitem id="menu_for_model_one_lines"
+        name="Model Lines"
+        action="action_for_model_one_lines"
+        parent="menu_for_sampleeee_module"  <!-- Reference without module prefix -->
+        sequence="2" />
+</odoo>

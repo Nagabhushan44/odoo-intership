@@ -10,16 +10,19 @@
 					<sheet>
 						<group>
 							<group>
+								<field name="seq" readonly="1"/>
 								<field name="name" string="Name" />
 								<field name="age" />
 								<field name="email" />
-								<field name="description" />
+								<field name="description" optional="hide"/>
+								<field name="sale_ids" domain="[('state','=','sale'),('user_id', '=', 2)]" />
 							</group>
 							<group>
 								<field name="gender" />
 								<field name="active" />
 								<field name="joining_date" />
 								<field name="create_uid" string="Created By" readonly="1"/>
+								<field name="partner_ids" widget="many2many_tags" />
 							</group>
 						</group>
 					</sheet>
@@ -37,10 +40,12 @@
 					<field name="age" />
 					<field name="email" />
 					<field name="joining_date" />
-					<field name="description" />
+					<field name="description" optional="hide"/>
 					<field name="gender" />
 					<field name="active" />
 					<field name="create_uid" string="Created By"/>
+					<field name="partner_ids" widget="many2many_tags" />
+					<field name="sale_ids" widget="many2many_tags" />
 				</list>
 			</field>
 		</record>
@@ -57,7 +62,7 @@
 					<field name="joining_date" />
 					<field name="gender" />
 					<templates>
-						<t t-name="kanban-box">
+						<t t-name="kanban-card">
 							<div t-attf-class="oe_kanban_global_click">
 								<div class="oe_kanban_details">
 									<ul>
