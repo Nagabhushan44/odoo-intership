@@ -36,6 +36,7 @@
 			<field name="model">model.one</field>
 			<field name="arch" type="xml">
 				<list string='Model One'>
+					<field name="seq"/>
 					<field name="name" string="Name" />
 					<field name="age" />
 					<field name="email" />
@@ -62,7 +63,7 @@
 					<field name="joining_date" />
 					<field name="gender" />
 					<templates>
-						<t t-name="kanban-card">
+						<t t-name="kanban-box">
 							<div t-attf-class="oe_kanban_global_click">
 								<div class="oe_kanban_details">
 									<ul>
@@ -91,7 +92,7 @@
 					<field name="email" />
 					<field name="joining_date" />
 					<!-- Filters -->
-					<filter string="Archived" name="archived" domain="[('active', '=', False)]" />
+					<filter string="Archived" name="archived" domain="['|',('gender', '=', 'female'),('age','>',18)]" />
 					<filter string="Adults" name="adults" domain="[('age', '>', 18)]" />
 					<filter string="Joined This Year" name="joined_this_year" domain="[('joining_date', '>=', (context_today().replace(month=1, day=1)))]" />
 					<filter string="With Email" name="has_email" domain="[('email','!=',False)]"/>

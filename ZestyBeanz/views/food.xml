@@ -10,7 +10,7 @@
 
 					<header>
 						<div class="custom-header-buttons">
-							<button name="create_sale_order" string="Create Sale Order" invisible="sale_created == True" type="object" class="oe_highlight"/>
+							<button name="create_sale_order" string="Create Sale Order" invisible="_sale_created == True" type="object" class="oe_highlight"/>
 							<button name="purchase_records" string="Purchase Orders"  type="object" class="oe_highlight"/>
 							<button name="change_the_record" string="Write the vals"  type="object" class="oe_highlight"/>
 							<button name="delet_the_rec" string="Delete"  type="object" class="oe_highlight"/>
@@ -26,7 +26,7 @@
                             <field name="is_satisfied" />
 							<field name="sale_order_id" readonly="1"/>
 							<field name="invoice_id" readonly="1"/>
-							<field name="sale_created" invisible="1"/>
+							<field name="_sale_created" invisible="1"/>
 							
                         </group>
 
@@ -36,8 +36,9 @@
                             <field name="types" />
                             <field name="images" />
                             <field name="blog" />
-							<field name="date_of_birth" />
-							<field name="age" />
+                            <field name="date_of_birth" />
+                            <field name="age" />
+							
                         </group>
                     </group>
 
