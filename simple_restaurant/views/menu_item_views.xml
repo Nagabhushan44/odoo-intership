@@ -2,16 +2,17 @@
 <odoo>
     <data>
         <!-- Menu Item Tree View -->
-        <record id="view_menu_item_tree" model="ir.ui.view">
-            <field name="name">menu.item.tree</field>
-            <field name="model">restaurant.menu.item</field>
-            <field name="arch" type="xml">
-                <tree>
+     <record id="view_menu_item_list" model="ir.ui.view">
+        <field name="name">menu.item.list</field>
+        <field name="model">restaurant.menu.item</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+                <list>
                     <field name="name"/>
                     <field name="category"/>
                     <field name="price"/>
                     <field name="active"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -19,6 +20,7 @@
         <record id="view_menu_item_form" model="ir.ui.view">
             <field name="name">menu.item.form</field>
             <field name="model">restaurant.menu.item</field>
+            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
@@ -40,7 +42,7 @@
         <record id="action_menu_items" model="ir.actions.act_window">
             <field name="name">Menu Items</field>
             <field name="res_model">restaurant.menu.item</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
     </data>
 </odoo>

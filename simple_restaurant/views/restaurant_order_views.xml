@@ -2,24 +2,26 @@
 <odoo>
     <data>
         <!-- Order Tree View -->
-        <record id="view_order_tree" model="ir.ui.view">
-            <field name="name">order.tree</field>
-            <field name="model">restaurant.order</field>
-            <field name="arch" type="xml">
-                <tree>
+         <record id="view_restaurant_order_list" model="ir.ui.view">
+        <field name="name">restaurant.order.list</field>
+        <field name="model">restaurant.order</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+                <list>
                     <field name="name"/>
                     <field name="customer_name"/>
                     <field name="order_date"/>
                     <field name="total"/>
                     <field name="status"/>
-                </tree>
+                </list>
             </field>
         </record>
 
         <!-- Order Form View -->
         <record id="view_order_form" model="ir.ui.view">
-            <field name="name">order.form</field>
+            <field name="name">restaurant.order.form</field>
             <field name="model">restaurant.order</field>
+            <field name="type">form</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
@@ -31,12 +33,12 @@
                             <field name="total" readonly="1"/>
                         </group>
                         <field name="order_lines">
-                            <tree editable="bottom">
+                            <list editable="bottom">
                                 <field name="menu_item_id"/>
                                 <field name="quantity"/>
                                 <field name="price" readonly="1"/>
                                 <field name="subtotal" readonly="1"/>
-                            </tree>
+                            </list>
                         </field>
                     </sheet>
                 </form>
@@ -45,9 +47,9 @@
 
         <!-- Order Action -->
         <record id="action_orders" model="ir.actions.act_window">
-            <field name="name">Orders</field>
+            <field name="name">Restaurant.Orders</field>
             <field name="res_model">restaurant.order</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
         </record>
     </data>
 </odoo>

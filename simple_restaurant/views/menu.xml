@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_restaurant_root" name="Restaurant"/>
+        <menuitem id="menu_restaurant_items" name="Menu Items" parent="menu_restaurant_root" action="action_menu_items"/>
+        <menuitem id="menu_restaurant_orders" name="Orders" parent="menu_restaurant_root" action="action_orders"/>
+    </data>
+</odoo>

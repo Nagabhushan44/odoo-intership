@@ -33,6 +33,7 @@
                 'security/ir.model.access.csv',
                 'views/menu_item_views.xml',
                 'views/restaurant_order_views.xml',
+                'views/menu.xml',
     ],
     'test': [],
     'demo': [],

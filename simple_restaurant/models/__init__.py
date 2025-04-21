@@ -1,2 +1,1 @@
-from . import menu_item
-from . import restaurant_order
+from . import menu_item,restaurant_order
