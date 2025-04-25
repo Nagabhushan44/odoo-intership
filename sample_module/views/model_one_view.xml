@@ -7,7 +7,7 @@
             <field name="model">model.one</field>
             <field name="arch" type="xml">
                 <form string='Model One'>
-                        					<header>
+                        <header>
 						<button name="helloworld" string="Hello World" type="object" class="btn-primary" />
 						<button name="show_wizard" string="Show Wizard" type="object" class="btn-secondary" />
 						<button name="%(sample_module.action_for_sample_wizard)d" string="Wizard Action Button" type="action" class="oe_highlight" />
@@ -29,17 +29,20 @@
                             </group>
                             <group>
                                 <field name="gender" />
+                                <field name="is_special" />	
                                 <field name="active" />
                                 <field name="joining_date" />
                                 <field name="date"/> <!-- Ensure this field is defined in the model -->
                                 <field name="create_uid" string="Created By" readonly="1"/>
                                 <field name="partner_ids" widget="many2many_tags"/>
+                                <field name="partner_count" />	
                             </group>
                         </group>
                         <notebook>
 						<page string="Model One Lines">
 							<field name="model_one_line_ids" >
 								<list editable="bottom">
+                                    <field name="id" />
 									<field name="name" />
 									<field name="product_id"  />
 									<field name="price"  />
