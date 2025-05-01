@@ -34,6 +34,7 @@
 				'security/ir.model.access.csv',
                 'security/security.xml',
                 'data/sequence.xml',
+                'data/cron.xml',
                 'wizard/sample_wizard_view.xml',
                 'views/car_rental_view.xml',
                 'views/food_view.xml',

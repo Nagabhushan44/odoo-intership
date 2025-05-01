@@ -11,6 +11,8 @@
 						<group>
 						<group>
 							<field name="name" />
+							<field name="dob" />
+                            <field name="age" />
 						</group>
 					</group>
 					</sheet>

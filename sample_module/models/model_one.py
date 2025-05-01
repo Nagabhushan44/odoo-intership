@@ -1,4 +1,6 @@
 from odoo import models, fields, api
+from datetime import date
+from odoo.exceptions import ValidationError
 
 class ModelOne(models.Model):
     _name = 'model.one'
@@ -7,9 +9,10 @@ class ModelOne(models.Model):
     seq = fields.Char(string="Sequence")
     name = fields.Char(string="Name", help='A normal name field', required=True, copy=False)
     age = fields.Integer(string="Age", default=18)
-    email = fields.Char(string="Email", required=True, copy=False)
+    email = fields.Char(string="Email")
     joining_date = fields.Date(string="Joining Date", required=True)
     date = fields.Date(string='Date')
+    dob = fields.Date(string="Date of Birth")
     gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('other', 'Other')], 
                             string="Gender", required=True, copy=False)
     active = fields.Boolean("Active", default=True)
@@ -54,17 +57,32 @@ class ModelOne(models.Model):
         """Simple test method"""
         print("Hello World")
 
+    # display a wizard through button action
     def show_wizard(self):
-        """Method to show a wizard"""
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'My Sample Wizard',
-            'res_model': 'sample.wizard',
-            'view_mode': 'form',
-            'view_id': self.env.ref('sample_module.view_form_sample_wizard').id,
-            'target': 'new',
-            'context': {'default_name': 'Naga'}
+            return {
+        'type': 'ir.actions.act_window',
+        'name': 'My Sample Wizard',
+        'res_model': 'sample.wizard',
+        'view_mode': 'form',
+        'view_id': self.env.ref('sample_module.view_form_sample_wizard').id,
+        'target': 'new',
+        'context': {
+            'default_name': 'Naga',
+            'default_dob': self.dob if hasattr(self, 'dob') else False
         }
+    }
+
+        
+    @api.depends('dob')
+    def _compute_age(self):
+        for rec in self:
+            if rec.dob:
+                today = date.today()
+                rec.age = today.year - rec.dob.year - ((today.month, today.day) < (rec.dob.month, rec.dob.day))
+            else:
+                rec.age = 0
+
+
 
     #@api method decorators
 	#1. @api.model : model level operations, don't need recordsets
@@ -92,9 +110,37 @@ class ModelOne(models.Model):
                 record.is_special = True
             else:
                 record.is_special = False
-	
 
+    def increase_age(self):
+        for record in self:
+            record.age += 1
+    
+	    
+    @api.constrains('email')
+    def check_email(self):
+        for record in self:
+            if record.email:  
+                if not isinstance(record.email, str):
+                    raise ValidationError("Email must be a text value")
+                if not record.email.endswith('@gmail.com'):
+                    raise ValidationError("This email doesn't end with @gmail.com. Please enter a valid email address.")
+                    
+    #4. _sql_constraints : to set database related constraints like unique, etc.
+    _sql_constraints = [
+        ('unique_email_user', 'unique(email)', 'This email already exists. Email must be unique'),
+    ]
 
+    # method for scheduler
+    def increase_age(self):
+        records = self.search([]) # fetch all records
+        for record in records:
+            print("age before :", record.age)
+            record.age += 1
+            print("age after :", record.age)    
+    
+    def change_description(self):
+        for record in self:
+            record.description = "Description added through server action"
 
 class ModelOnelines(models.Model):
     _name = "model.one.lines"

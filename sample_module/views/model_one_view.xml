@@ -20,9 +20,10 @@
                             <group>
                                 <field name="seq" readonly="1"/>
                                 <field name="name" string="Name" />
+                                <field name="dob" string="Date of Birth"/>
                                 <field name="age" />
                                 <field name="email" />
-                                <field name="description" optional="hide"/>
+                                <field name="description" />
                                 <field name="product_ids" widget="many2many_tags" />
                                 <field name="sale_ids" widget="many2many_tags" />	
                                 <field name="sale_ids" domain="[('state','=','sale'),('user_id', '=', 2)]" />
@@ -32,7 +33,7 @@
                                 <field name="is_special" />	
                                 <field name="active" />
                                 <field name="joining_date" />
-                                <field name="date"/> <!-- Ensure this field is defined in the model -->
+                                <field name="date"/> 
                                 <field name="create_uid" string="Created By" readonly="1"/>
                                 <field name="partner_ids" widget="many2many_tags"/>
                                 <field name="partner_count" />	
@@ -62,7 +63,8 @@
             <field name="arch" type="xml">
                 <list string='Model One'>
                     <field name="seq"/>
-                    <field name="name" string="Name" />
+                    <field name="name" />
+                    <field name="dob" string="Date of Birth"/>
                     <field name="age" />
                     <field name="email" />
                     <field name="joining_date" />
@@ -84,6 +86,7 @@
                 <kanban string='Model One'>
                     <field name="name" />
                     <field name="age" />
+                    <field name="dob" />
                     <field name="email" />
                     <field name="joining_date" />
                     <field name="gender" />
@@ -93,6 +96,7 @@
                                 <div class="oe_kanban_details">
                                     <ul>
                                         <li>Name: <field name="name" /></li>
+                                        <li>Date of Birth: <field name="dob" /></li>
                                         <li>Age: <field name="age" /></li>
                                         <li>Email: <field name="email" /></li>
                                         <li>Joined: <field name="joining_date" /></li>
@@ -113,6 +117,7 @@
             <field name="arch" type="xml">
                 <search string='Model One'>
                     <field name="name" />
+                    <field name="dob" string="Date of Birth"/>
                     <field name="age" />
                     <field name="email" />
                     <field name="joining_date" />
