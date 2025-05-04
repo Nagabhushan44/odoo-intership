@@ -40,6 +40,7 @@
                 'views/food_view.xml',
                 'views/model_one_view.xml',
                 'views/model_one_lines.xml',
+                'views/sale_order_view.xml',
                 'views/menu.xml',
 				
         ],
