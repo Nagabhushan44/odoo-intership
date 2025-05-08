@@ -25,6 +25,7 @@ class ModelOne(models.Model):
     
     partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
     is_special = fields.Boolean('Is Special')
+    employee_id = fields.Many2one('my.employee', string="Employee")
 
 
     def write_values(self):
@@ -141,6 +142,13 @@ class ModelOne(models.Model):
     def change_description(self):
         for record in self:
             record.description = "Description added through server action"
+
+    def send_my_email(self):
+    template = self.env.ref('sample_module.my_sample_email_template')
+    for record in self:
+        values = {'subject': 'My Custom Subject via Method'}
+        template.send_mail(record.id, force_send=True, email_values=values)
+        
 
 class ModelOnelines(models.Model):
     _name = "model.one.lines"

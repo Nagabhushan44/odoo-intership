@@ -35,11 +35,13 @@
                 'security/security.xml',
                 'data/sequence.xml',
                 'data/cron.xml',
+                'data/my_mail_template.xml'
                 'wizard/sample_wizard_view.xml',
                 'views/car_rental_view.xml',
                 'views/food_view.xml',
                 'views/model_one_view.xml',
                 'views/model_one_lines.xml',
+                'views/my_employee_view.xml',
                 'views/sale_order_view.xml',
                 'views/menu.xml',
 				

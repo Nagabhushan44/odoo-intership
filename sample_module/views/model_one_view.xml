@@ -13,13 +13,18 @@
 						<button name="%(sample_module.action_for_sample_wizard)d" string="Wizard Action Button" type="action" class="oe_highlight" />
                         <button name="%(sale.action_quotations_with_onboarding)d" string="Sale Order" type="action" class="oe_highlight" />
                         <button name="write_values" string="Write Values" type="object" class="btn-primary" />
-
+                        <button name="send_my_email" string="Send Email" type="object" class="btn-primary" />
                     </header>
                     <sheet>
+
+                        <div class="oe_button_box" name="button_box">
+		                <button name="show_wizard" string="Show Wizard" type="object" icon="fa-ticket" class="oe_stat_button" /> 
+                    </div> 
                         <group>
                             <group>
                                 <field name="seq" readonly="1"/>
-                                <field name="name" string="Name" />
+                                <field name="name" string="Display Name" />
+                                <field name="employee_name" />
                                 <field name="dob" string="Date of Birth"/>
                                 <field name="age" />
                                 <field name="email" />

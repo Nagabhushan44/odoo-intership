@@ -19,9 +19,15 @@
               sequence="2" />
 
     <menuitem id="menu_for_sample_wizard"
-		          name="My Wizard"
-		          action="action_for_sample_wizard"
+		        name="My Wizard"
+		        action="action_for_sample_wizard"
 	          	parent='menu_demo_sample'
-		          sequence="3" />
+		        equence="3" />
+
+    <menuitem id="menu_for_my_employee"
+		    name="Employee"
+		    action="action_for_my_employee"
+		    parent='menu_demo_sample'
+		    sequence="4" />
         
 </odoo>
