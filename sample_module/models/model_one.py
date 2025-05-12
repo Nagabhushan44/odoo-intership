@@ -26,7 +26,7 @@ class ModelOne(models.Model):
     partner_count = fields.Integer(string="Partner Count", compute="get_partner_count")
     is_special = fields.Boolean('Is Special')
     employee_id = fields.Many2one('my.employee', string="Employee")
-
+    sale_count = fields.Integer(string="Sale Count", compute="get_sale_count")
 
     def write_values(self):
         """
@@ -60,20 +60,19 @@ class ModelOne(models.Model):
 
     # display a wizard through button action
     def show_wizard(self):
-            return {
-        'type': 'ir.actions.act_window',
-        'name': 'My Sample Wizard',
-        'res_model': 'sample.wizard',
-        'view_mode': 'form',
-        'view_id': self.env.ref('sample_module.view_form_sample_wizard').id,
-        'target': 'new',
-        'context': {
-            'default_name': 'Naga',
-            'default_dob': self.dob if hasattr(self, 'dob') else False
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'My Sample Wizard',
+            'res_model': 'sample.wizard',
+            'view_mode': 'form',
+            'view_id': self.env.ref('sample_module.view_form_sample_wizard').id,
+            'target': 'new',
+            'context': {
+                'default_name': 'Naga',
+                'default_dob': self.dob if hasattr(self, 'dob') else False
+            }
         }
-    }
 
-        
     @api.depends('dob')
     def _compute_age(self):
         for rec in self:
@@ -83,15 +82,13 @@ class ModelOne(models.Model):
             else:
                 rec.age = 0
 
-
-
     #@api method decorators
-	#1. @api.model : model level operations, don't need recordsets
+    #1. @api.model : model level operations, don't need recordsets
     @api.model
     def create(self, vals):
         """Override create method to set sequence"""
         vals['seq'] = self.env['ir.sequence'].next_by_code('sequence.model.one')
-        res=super(ModelOne, self).create(vals)
+        res = super(ModelOne, self).create(vals)
         return res
 
     #2. @api.depends : define dependencies between models and fields
@@ -102,6 +99,14 @@ class ModelOne(models.Model):
                 record.partner_count = len(record.partner_ids)
             else:
                 record.partner_count = 0
+
+    @api.depends('sale_ids')
+    def get_sale_count(self):
+        for record in self:
+            if record.sale_ids:
+                record.sale_count = len(record.sale_ids)
+            else:
+                record.sale_count = 0
     
     #3. @api.onchange : execute your logic when there is a change in a field
     @api.onchange('gender')
@@ -113,10 +118,12 @@ class ModelOne(models.Model):
                 record.is_special = False
 
     def increase_age(self):
-        for record in self:
+        records = self.search([]) # fetch all records
+        for record in records:
+            print("age before :", record.age)
             record.age += 1
+            print("age after :", record.age)    
     
-	    
     @api.constrains('email')
     def check_email(self):
         for record in self:
@@ -131,26 +138,28 @@ class ModelOne(models.Model):
         ('unique_email_user', 'unique(email)', 'This email already exists. Email must be unique'),
     ]
 
-    # method for scheduler
-    def increase_age(self):
-        records = self.search([]) # fetch all records
-        for record in records:
-            print("age before :", record.age)
-            record.age += 1
-            print("age after :", record.age)    
-    
     def change_description(self):
         for record in self:
             record.description = "Description added through server action"
 
     def send_my_email(self):
-    template = self.env.ref('sample_module.my_sample_email_template')
-    for record in self:
-        values = {'subject': 'My Custom Subject via Method'}
-        template.send_mail(record.id, force_send=True, email_values=values)
-        
+        template = self.env.ref('sample.module.my_sample_email_template')
+        for record in self:
+            values = {'subject': 'My Custom Subject via Method'}
+            template.send_mail(record.id, force_send=True, email_values=values)
+    
+    def show_sale(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sale Order',
+            'res_model': 'sale.order',
+            'view_mode': 'list,form',
+            'target': 'current',
+            'domain': [('id', 'in', self.sale_ids.ids)]
+        }
 
-class ModelOnelines(models.Model):
+
+class ModelOneLines(models.Model):
     _name = "model.one.lines"
     _description = "Model One lines"
 
