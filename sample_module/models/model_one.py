@@ -143,7 +143,7 @@ class ModelOne(models.Model):
             record.description = "Description added through server action"
 
     def send_my_email(self):
-        template = self.env.ref('sample.module.my_sample_email_template')
+        template = self.env.ref('sample_module.my_sample_email_template')
         for record in self:
             values = {'subject': 'My Custom Subject via Method'}
             template.send_mail(record.id, force_send=True, email_values=values)

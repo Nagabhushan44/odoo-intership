@@ -34,7 +34,6 @@
                             <group>
                                 <field name="seq" readonly="1"/>
                                 <field name="name" string="Display Name" />
-                                <field name="employee_name" />
                                 <field name="dob" string="Date of Birth"/>
                                 <field name="age" />
                                 <field name="email" />
@@ -48,6 +47,7 @@
                                 <field name="gender" />
                                 <field name="is_special" />	
                                 <field name="active" />
+                                <field name="employee_id" invisible="not employee_id" />
                                 <field name="joining_date" />
                                 <field name="date"/> 
                                 <field name="create_uid" string="Created By" readonly="1"/>
@@ -203,8 +203,8 @@
 
         <record id="action_increase_age_model_one" model="ir.actions.server">
 			<field name="name">Change Description</field>
-			<field name="model_id" ref="sample.module.model_model_one" />
-			<field name="binding_model_id" ref="sample.module.model_model_one" />
+			<field name="model_id" ref="model_model_one" />
+			<field name="binding_model_id" ref="model_model_one" />
 			<field name="state">code</field>
 			<field name="code">action = records.change_description()</field>
 		</record>
