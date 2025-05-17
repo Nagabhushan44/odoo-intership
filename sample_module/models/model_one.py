@@ -51,8 +51,8 @@ class ModelOne(models.Model):
         # self.write({'model_one_line_ids': [[2, line]]})  
         # self.write({'model_one_line_ids': [[3, line]]})  
         # self.write({'model_one_line_ids': [[4, existing_line]]})  
-        # self.write({'model_one_line_ids': [[4, ex_line]]})  
-        self.write({'model_one_line_ids': [[6, 0, ex_line]]})     
+        # self.write({'model_one_line_ids': [[4, ex_line]]})
+        self.write({'model_one_line_ids': [[6, 0, ex_line]]})    
 
     def helloworld(self):
         """Simple test method"""

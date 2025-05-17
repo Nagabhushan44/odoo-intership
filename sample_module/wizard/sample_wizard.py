@@ -1,4 +1,5 @@
 from odoo import _, api, fields, models
+from datetime import date
 
 
 class SampleWizard(models.TransientModel):

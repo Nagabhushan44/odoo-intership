@@ -29,9 +29,9 @@
     'author': 'Nagabhushan',
     'website': 'www.zbeanztech.com',
     "license": "LGPL-3",
-    'depends': ['base','sale','sale_management','account','contacts','product'],
+    'depends': ['base','sale','sale_management','account','contacts','product','report_xlsx'],
     'data': [
-				'security/ir.model.access.csv',
+                'security/ir.model.access.csv',
                 'security/security.xml',
                 'data/sequence.xml',
                 'data/cron.xml',
